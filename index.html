@@ -3,20 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather App</title>
+    <title>แอปพลิเคชันสภาพอากาศ</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ99+hN5I2yB57Z4zS0L49N+P9K0B9b77hE4jG5v9L5p4h5z12p1T2p1P9w10Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="app-container">
-        <h1>Weather App</h1>
-        <form id="search-form">
-            <input type="text" id="city-input" placeholder="ค้นหาชื่อเมือง..." required>
-            <button type="submit">ค้นหา</button>
-        </form>
-        <div id="weather-info-container" class="weather-info">
-            <!-- ข้อมูลสภาพอากาศจะแสดงที่นี่ -->
+<body class="bg-day transition-all duration-1000">
+
+    <div class="flex flex-col items-center justify-center min-h-screen p-4">
+        <div id="weather-card" class="bg-white/30 backdrop-blur-lg p-8 rounded-3xl shadow-2xl w-full max-w-md mx-auto transition-all duration-500 transform scale-100 hover:scale-105">
+            <!-- ส่วนการค้นหา -->
+            <form id="search-form" class="flex mb-6">
+                <input id="city-input" type="text" placeholder="ป้อนชื่อเมือง..." class="flex-grow p-3 rounded-l-full border-2 border-white focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white/50 text-gray-800 placeholder-gray-600 transition-all duration-300">
+                <button type="submit" id="search-btn" class="bg-blue-600 text-white p-3 rounded-r-full hover:bg-blue-700 transition-all duration-300">
+                    <i class="fas fa-search"></i>
+                </button>
+            </form>
+
+            <!-- ส่วนการแสดงผลสภาพอากาศ -->
+            <div id="weather-info-container" class="text-center text-white space-y-4">
+                <div id="city-name" class="text-4xl font-bold mb-2 transition-all duration-500 ease-in-out transform translate-y-0">กรุงเทพมหานคร</div>
+                <div id="weather-icon" class="text-8xl my-4">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <div id="temperature" class="text-6xl font-extrabold mb-4 transition-all duration-500 ease-in-out">30°C</div>
+                <div id="description" class="text-2xl font-semibold capitalize mb-4 transition-all duration-500 ease-in-out">ท้องฟ้าแจ่มใส</div>
+
+                <div class="grid grid-cols-2 gap-4 text-left p-4 bg-white/20 rounded-2xl">
+                    <div>
+                        <div class="text-lg"><i class="fas fa-tint mr-2"></i> ความชื้น</div>
+                        <div id="humidity" class="text-2xl font-bold">75%</div>
+                    </div>
+                    <div>
+                        <div class="text-lg"><i class="fas fa-wind mr-2"></i> ความเร็วลม</div>
+                        <div id="wind-speed" class="text-2xl font-bold">10 km/h</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="error-message" class="hidden text-center text-red-500 mt-4 bg-white/80 p-4 rounded-xl shadow-md transition-all duration-300">
+                <!-- ข้อความแสดงข้อผิดพลาด -->
+            </div>
+
+        
+            <div id="loading-spinner" class="hidden flex justify-center mt-6">
+                <div class="w-10 h-10 border-4 border-white border-t-4 border-t-blue-500 rounded-full animate-spin"></div>
+            </div>
         </div>
+        
+
+        <div id="forecast-container" class="mt-8 p-6 bg-white/30 backdrop-blur-lg rounded-3xl shadow-2xl w-full max-w-md mx-auto transition-all duration-500 hidden">
+            <h3 class="text-2xl font-bold text-white mb-4">พยากรณ์ล่วงหน้า 5 วัน</h3>
+            <div id="forecast-list" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+         
+            </div>
+        </div>
+
     </div>
+    
     <script src="script.js"></script>
+
 </body>
 </html>
